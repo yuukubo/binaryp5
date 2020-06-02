@@ -1,12 +1,12 @@
 // binaryp5
 
-let [canvas_W, canvas_H] = [640, 640];
+let [canvas_W, canvas_H] = [1000, 500];
 let is_bit_on = [];
 let button_X = [];
 let button_Y = [];
-let button_W = 50;
-let button_H = 50;
-let button_text_size = 16;
+let button_W = 80;
+let button_H = 80;
+let button_text_size = 20;
 let button_text = ["0", "1"];
 let button_label = ["1", "2", "4", "8", "16", "32", "64", "128"];
 let on_RGB = [10, 200, 100];
@@ -18,14 +18,13 @@ function setup() {
   textAlign(CENTER, CENTER);
   for (let i = 0; i < 8; i++) {
     is_bit_on[i] = 0;
-    button_X[i] = canvas_W * ( i + 1 ) / 10;
+    button_X[i] = canvas_W * ( 8 - i ) / 10;
     button_Y[i] = canvas_H * 2 / 10;
   }
 }
 
 function draw() {
-  background(100, 100 ,100);
-  set_pointer();
+  background(50, 50 ,50);
   for (let i = 0; i < 8; i++) {
     if (is_bit_on[i]) {
       set_button(on_RGB[0], on_RGB[1], on_RGB[2], button_X[i], button_Y[i], button_W, button_H);
@@ -35,6 +34,7 @@ function draw() {
       set_label(button_X[i], button_Y[i], button_label[i], button_text[0]);
     }
   }
+  set_pointer();
 }
 
 function set_pointer() {
