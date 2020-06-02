@@ -1,6 +1,6 @@
 // binaryp5
 
-let [canvas_W, canvas_H] = [1000, 500];
+let [canvas_W, canvas_H] = [940, 460];
 let is_bit_on = [];
 let button_X = [];
 let button_Y = [];
@@ -11,6 +11,7 @@ let button_text = ["0", "1"];
 let button_label = ["1", "2", "4", "8", "16", "32", "64", "128"];
 let on_RGB = [10, 200, 100];
 let off_RGB = [250, 60, 60];
+let decimal_num = 0;
 
 function setup() {
   createCanvas(canvas_W, canvas_H);
@@ -24,16 +25,19 @@ function setup() {
 }
 
 function draw() {
+  decimal_num = 0;
   background(50, 50 ,50);
   for (let i = 0; i < 8; i++) {
     if (is_bit_on[i]) {
       set_button(on_RGB[0], on_RGB[1], on_RGB[2], button_X[i], button_Y[i], button_W, button_H);
       set_label(button_X[i], button_Y[i], button_label[i], button_text[1]);
+      decimal_num = decimal_num + (2 ** i);
     } else {
       set_button(off_RGB[0], off_RGB[1], off_RGB[2], button_X[i], button_Y[i], button_W, button_H);
       set_label(button_X[i], button_Y[i], button_label[i], button_text[0]);
     }
   }
+  set_decimal_num();
   set_pointer();
 }
 
@@ -45,7 +49,7 @@ function set_pointer() {
   pop();
 }
 
-function mouseClicked() {
+function mousePressed() {
   for (let i = 0; i < 8; i++){
     if ((button_X[i] - button_W / 2 < mouseX && mouseX < button_X[i] + button_W / 2) && (button_Y[i] - button_H / 2 < mouseY && mouseY < button_Y[i] + button_H / 2)) {
       if (is_bit_on[i]) {
@@ -75,5 +79,16 @@ function set_label(button_X, button_Y, button_label, button_text) {
   noStroke();
   fill(10);
   text(button_label + " : " + button_text, button_X, button_Y);
+  pop();
+}
+
+function set_decimal_num() {
+  push();
+  textSize(button_text_size);
+  textFont("Comic Sans MS");
+  textAlign(CENTER, CENTER);
+  noStroke();
+  fill(200);
+  text(decimal_num, canvas_W * 9 / 10, canvas_H * 9 / 10);
   pop();
 }
