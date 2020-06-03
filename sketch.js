@@ -23,7 +23,7 @@ function setup() {
     button_Y[i] = canvas_H * 2 / 10;
   }
 }
-
+ 
 function draw() {
   decimal_num = 0;
   background(50, 50 ,50);
@@ -47,6 +47,10 @@ function set_pointer() {
   fill(255, 255, 0)
   circle(mouseX, mouseY, 4);
   pop();
+}
+
+function touchStarted() {
+  mousePressed();
 }
 
 function mousePressed() {
