@@ -1,5 +1,6 @@
 // binaryp5
 
+let game_title = "* binaryp5 * c6.1"
 let [canvas_W, canvas_H] = [940, 460];
 let is_bit_on = [];
 let button_X = [];
@@ -10,7 +11,7 @@ let button_text_size = 20;
 let button_text = ["0", "1"];
 let button_label = ["1", "2", "4", "8", "16", "32", "64", "128"];
 let on_RGB = [10, 200, 100];
-let off_RGB = [250, 60, 60];
+let off_RGB = [250, 90, 90];
 let decimal_num = 0;
 
 function setup() {
@@ -27,6 +28,7 @@ function setup() {
 function draw() {
   decimal_num = 0;
   background(50, 50 ,50);
+  set_game_title();
   for (let i = 0; i < 8; i++) {
     if (is_bit_on[i]) {
       set_button(on_RGB[0], on_RGB[1], on_RGB[2], button_X[i], button_Y[i], button_W, button_H);
@@ -36,8 +38,10 @@ function draw() {
       set_button(off_RGB[0], off_RGB[1], off_RGB[2], button_X[i], button_Y[i], button_W, button_H);
       set_label(button_X[i], button_Y[i], button_label[i], button_text[0]);
     }
+    if (i == 7) {
+      set_decimal_num(button_Y[i]);
+    }
   }
-  set_decimal_num();
   set_pointer();
 }
 
@@ -49,11 +53,15 @@ function set_pointer() {
   pop();
 }
 
-function touchStarted() {
-  mousePressed();
-}
+//function touchStarted() {
+//  mousePressed();
+//}
 
-function mousePressed() {
+//function touchEnded() {
+//}
+
+function mouseClicked() {
+//function mousePressed() {
   for (let i = 0; i < 8; i++){
     if ((button_X[i] - button_W / 2 < mouseX && mouseX < button_X[i] + button_W / 2) && (button_Y[i] - button_H / 2 < mouseY && mouseY < button_Y[i] + button_H / 2)) {
       if (is_bit_on[i]) {
@@ -86,13 +94,25 @@ function set_label(button_X, button_Y, button_label, button_text) {
   pop();
 }
 
-function set_decimal_num() {
+function set_decimal_num(button_Y) {
   push();
   textSize(button_text_size);
   textFont("Comic Sans MS");
   textAlign(CENTER, CENTER);
   noStroke();
   fill(200);
-  text(decimal_num, canvas_W * 9 / 10, canvas_H * 9 / 10);
+  text(" = ", canvas_W * 18 / 20, button_Y);
+  text(decimal_num, canvas_W * 19 / 20, button_Y);
+  pop();
+}
+
+function set_game_title() {
+  push();
+  textSize(10);
+  textFont("Comic Sans MS");
+  textAlign(CENTER, CENTER);
+  noStroke();
+  fill(200);
+  text(game_title, canvas_W * 9 / 10, canvas_H * 9 / 10);
   pop();
 }
