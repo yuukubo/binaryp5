@@ -7,3 +7,4 @@ https://yuukubo.github.io/binaryp5/
 # c4  : add decimal num  
 # c5  : test touch  
 # c6  : test touch, add ver  
+# c7  : test touch, test button size  
