@@ -8,3 +8,4 @@ https://yuukubo.github.io/binaryp5/
 # c5  : test touch  
 # c6  : test touch, add ver  
 # c7  : test touch, test button size  
+# c8  : add frame  

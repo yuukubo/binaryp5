@@ -1,13 +1,13 @@
 // binaryp5
 
-let game_title = "* binaryp5 * c7.3"
+let game_title = "* binaryp5 * c8.2"
 let [canvas_W, canvas_H] = [940, 460];
 let is_bit_on = [];
 let button_X = [];
 let button_Y = [];
 let button_W = 40;
 let button_H = 60;
-let button_text_size = 20;
+let button_text_size = 25;
 let button_text = ["0", "1"];
 let button_label = ["1", "2", "4", "8", "16", "32", "64", "128"];
 let on_RGB = [10, 200, 100];
@@ -16,12 +16,12 @@ let decimal_num = 0;
 let is_touch = 0;
 let score_frame_X = 890; // (canvas_W - score_frame_W) / 2 + (score_frame_W / 2)
 let score_frame_Y = canvas_H / 2;
-let score_frame_W = 100;
+let score_frame_W = 200;
 let score_frame_H = canvas_H - 40;
-let game_frame_X = [(canvas_W - score_frame_W) / 2, "", "", ""];
-let game_frame_Y = ["20", "", "", ""];
-let game_frame_W = ["820", "", "", ""];
-let game_frame_H = ["20", "", "", ""];
+let game_frame_X = [canvas_W / 2, canvas_W - 12, canvas_W / 2, "12", (canvas_W - score_frame_W) - 12];
+let game_frame_Y = ["20", canvas_H / 2, canvas_H - 20, canvas_H / 2, canvas_H / 2];
+let game_frame_W = ["920", "4", "920", "4", "4"];
+let game_frame_H = ["30", canvas_H - 20, "30", canvas_H - 20, canvas_H - 20];
 
 function setup() {
   window.addEventListener("touchstart", function (event) { event.preventDefault(); }, { passive: false });
@@ -32,16 +32,22 @@ function setup() {
   for (let i = 0; i < 8; i++) {
     is_bit_on[i] = 0;
     button_X[i] = (canvas_W - 100) * ( 8 - i ) / 10;
-    button_Y[i] = canvas_H * 2 / 10;
+    button_Y[i] = canvas_H * 3 / 10;
   }
 }
  
 function draw() {
   decimal_num = 0;
   background(50, 50 ,50);
-//  for (let i = 0; i < 4; i++) {
-//    game_frame();
-//  }
+  for (let i = 0; i < 5; i++) {
+    set_game_frame(game_frame_X[i], game_frame_Y[i], game_frame_W[i], game_frame_H[i]);
+    if (i == 0) {
+      set_frame_label(game_frame_Y[i]);
+    }
+    if (i == 2) {
+      set_frame_label(game_frame_Y[i]);
+    }
+  }
   set_game_title();
   for (let i = 0; i < 8; i++) {
     if (is_bit_on[i]) {
@@ -133,19 +139,27 @@ function set_game_title() {
   textFont("Comic Sans MS");
   textAlign(CENTER, CENTER);
   noStroke();
-  fill(200);
-  text(game_title, canvas_W * 9 / 10, canvas_H * 9 / 10);
+  fill(10);
+  text(game_title, canvas_W * 9 / 10, canvas_H -20);
   pop();
 }
 
 function set_game_frame(game_frame_X, game_frame_Y, game_frame_W, game_frame_H) {
   push();
-  textSize(10);
-  textFont("Comic Sans MS");
-  textAlign(CENTER, CENTER);
   noStroke();
   fill(240);
   rect(game_frame_X, game_frame_Y, game_frame_W, game_frame_H);
-  text(button_label + " : ", button_X, button_Y);
+  pop();
+}
+
+function set_frame_label(game_frame_Y) {
+  push();
+  textSize(20);
+  textFont("Comic Sans MS");
+  textAlign(CENTER, CENTER);
+  fill(10);
+  for (let i = 0; i < 8; i++) {
+    text(button_label[i], button_X[i], game_frame_Y);
+  }
   pop();
 }
