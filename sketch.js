@@ -1,6 +1,6 @@
 // binaryp5
 
-let game_title = "* binaryp5 * c8.2"
+let game_title = "* binaryp5 * c9.0"
 let [canvas_W, canvas_H] = [940, 460];
 let is_bit_on = [];
 let button_X = [];
@@ -31,14 +31,14 @@ function setup() {
   textAlign(CENTER, CENTER);
   for (let i = 0; i < 8; i++) {
     is_bit_on[i] = 0;
-    button_X[i] = (canvas_W - 100) * ( 8 - i ) / 10;
+    button_X[i] = (canvas_W - score_frame_W) * ( 9 - i ) / 16;
     button_Y[i] = canvas_H * 3 / 10;
   }
 }
  
 function draw() {
   decimal_num = 0;
-  background(50, 50 ,50);
+  background(60, 60 ,60);
   for (let i = 0; i < 5; i++) {
     set_game_frame(game_frame_X[i], game_frame_Y[i], game_frame_W[i], game_frame_H[i]);
     if (i == 0) {
@@ -116,7 +116,6 @@ function set_label(button_X, button_Y, button_label, button_text) {
   textAlign(CENTER, CENTER);
   noStroke();
   fill(10);
-//  text(button_label + " : " + button_text, button_X, button_Y);
   text(button_text, button_X, button_Y);
   pop();
 }
@@ -128,8 +127,8 @@ function set_decimal_num(button_Y) {
   textAlign(CENTER, CENTER);
   noStroke();
   fill(200);
-  text(" = ", canvas_W * 18 / 20, button_Y);
-  text(decimal_num, canvas_W * 19 / 20, button_Y);
+  text(" = ", (canvas_W - score_frame_W) * 11 / 16, button_Y);
+  text(decimal_num, (canvas_W - score_frame_W) * 12 / 16, button_Y);
   pop();
 }
 
